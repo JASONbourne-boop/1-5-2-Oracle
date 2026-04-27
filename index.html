@@ -6,8 +6,17 @@
 <script src="https://js.puter.com/v2/"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0a0614; min-height: 100vh; font-family: 'Crimson Pro', serif; color: #e8dfc8; overflow-x: hidden; }
+  
+  body { 
+    background: #0a0614; 
+    min-height: 100vh; 
+    font-family: 'Crimson Pro', serif; 
+    color: #e8dfc8; 
+    overflow-x: hidden; 
+  }
+
   .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; background: radial-gradient(ellipse at 20% 20%, #1a0a2e 0%, #0a0614 60%); }
   .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
   @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 1; } }
@@ -15,8 +24,10 @@
   .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 20px 20px 60px; text-align: center; }
   
   .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 40px; }
+  
   .draw-btn { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #0a0614; background: linear-gradient(135deg, #f0c040, #e0a020); border: none; padding: 16px 44px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(240,192,64,0.3); }
   .draw-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(240,192,64,0.5); }
+  .draw-btn:active { transform: scale(0.98); }
   
   .daily-btn { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; background: transparent; border: 1px solid rgba(157,143,192,0.4); padding: 10px 28px; border-radius: 50px; cursor: pointer; transition: all 0.3s; }
   .daily-btn:hover { color: #f0c040; border-color: #f0c040; }
@@ -101,30 +112,123 @@
 </div>
 
 <script>
-const pokemon = [
-  {id:1,name:"Bulbasaur",type:"grass",keyword:"Quiet Patience",readings:{past:"You sowed seeds in silence long ago. Look for the first signs of green breaking the soil.",present:"You are where you need to be. Growth cannot be forced, only nurtured with steady care.",future:"Slow progress will build roots so deep that no coming storm can shake you.",daily:"Focus on your roots today. True growth happens when no one is watching, so be patient."}},
-  {id:3,name:"Venusaur",type:"grass",keyword:"Earth Abundance",readings:{past:"You weathered seasons of drought and storm. You are a master of silent growth.",present:"Standing in the power of your harvest. Recognize the richness surrounding your life.",future:"Share your abundance. Your garden grows larger the more of it you give away.",daily:"Abundance is a mindset today. Look at how much you have already built through your effort."}},
-  {id:4,name:"Charmander",type:"fire",keyword:"The Inner Flame",readings:{past:"A small spark was ignited in your past. It has been smoldering, waiting for air.",present:"Keep your passion burning but contained. Do not let your intensity consume what you love.",future:"Your inner light will eventually grow into a beacon that guides others through their own darkness.",daily:"Enthusiasm is your compass. Let your natural excitement lead you toward a new creative spark."}},
-  {id:6,name:"Charizard",type:"fire",keyword:"Fierce Sovereignty",readings:{past:"You burned through old expectations. That fire cleared the way for your current flight.",present:"Spread your wings and take up space. You do not need anyone's permission to own your sky.",future:"You will soon reach a position of true authority where your fire protects rather than burns.",daily:"Confidence is your best asset today. Stand tall and let your presence be felt without apology."}},
-  {id:7,name:"Squirtle",type:"water",keyword:"The Protected Heart",readings:{past:"You learned to carry your home and defenses within you. That shell kept you safe.",present:"Emotions are flowing like tides. Do not resist the current; simply find your balance.",future:"Gentleness will be your strongest armor. Softness will eventually ensure your total victory.",daily:"It is okay to retreat into your shell for a moment. Protection is necessary maintenance."}},
-  {id:9,name:"Blastoise",type:"water",keyword:"Focused Force",readings:{past:"You held a tremendous amount of internal pressure for a long time. A heavy weight.",present:"Aim your intentions with precision. Do not scatter energy today; strike at the core.",future:"You will become the steady current that carries an entire community forward through rocky waters.",daily:"Power without focus is just noise. Channel your energy into one single, meaningful task today."}},
-  {id:12,name:"Butterfree",type:"bug",keyword:"Spiritual Freedom",readings:{past:"A season of restricted movement has ended. You have fully processed the cocoon phase.",present:"Your wings are dry and ready for use. Trust the wind to carry you to higher heights.",future:"You will find a beautiful new habitat. The old garden was simply a training ground.",daily:"Look at the world from a higher perspective. The small details that worried you seem smaller now."}},
-  {id:25,name:"Pikachu",type:"electric",keyword:"Pure Joy",readings:{past:"A moment of childlike electricity defined your path. Remember that spark of excitement.",present:"Radiate your energy outward without fear. Your vibration is meant to light up the room.",future:"You will soon act as a bridge between two worlds, connecting people through your unique spirit.",daily:"Shock the system with a bit of fun. Your positive energy is contagious to those around you."}},
-  {id:26,name:"Raichu",type:"electric",keyword:"Amplified Aura",readings:{past:"You kept your power grounded for a long time, building up a charge hidden from the world.",present:"The time for subtlety has passed. Release the full energy of your personality.",future:"You will light the way for a group. Your energy is the spark needed to start a movement.",daily:"Don't hold back your true opinions today. You have more power than you are currently using."}},
-  {id:38,name:"Ninetales",type:"fire",keyword:"Karmic Fate",readings:{past:"Long memories and ancient patterns shaped your journey. You are part of a larger cycle.",present:"Ancient wisdom is surfacing. Listen to the intuition that feels significantly older than you.",future:"A long karmic cycle is coming to a close. Step into a completely new, unwritten destiny.",daily:"Your intuition is razor-sharp today. If something feels like 'fate,' it probably is. Listen."}},
-  {id:59,name:"Arcanine",type:"fire",keyword:"Noble Loyalty",readings:{past:"You dedicated yourself to a person with absolute devotion. That bond defined your history.",present:"Stand your ground with grace. Your presence alone provides security to those around you.",future:"Legendary status is earned through consistency. Keep showing up and your legacy will be set.",daily:"Honor your most trusted connections today with a small gesture of genuine gratitude."}},
-  {id:65,name:"Alakazam",type:"psychic",keyword:"Mental Mastery",readings:{past:"You relied on your intellect to solve every riddle. You out-thought the world early on.",present:"Focus your mind. The answer is not external; it is already stored in your own memory.",future:"Your wisdom will be sought after. Prepare to teach what you have spent a lifetime learning.",daily:"Your brain is a supercomputer. Use it to solve a lingering puzzle rather than just worrying."}},
-  {id:94,name:"Gengar",type:"ghost",keyword:"Shadow Integration",readings:{past:"You spent a long time wrestling with shadows. That conflict finally sharpened your perspective.",present:"Own your depth and mystery. The parts that feel 'dark' are actually your greatest strengths.",future:"By integrating your fears, you will become an unstoppable force of mischievous wisdom.",daily:"Don't be afraid of the things lurking in the corners of your mind. Invite them to tea."}},
-  {id:121,name:"Starmie",type:"water",keyword:"Cosmic Alignment",readings:{past:"You felt a pull toward something greater. Your past was a search for hidden meaning.",present:"Your intuition is synced with the stars. Trust the gut feeling that feels like a signal.",future:"A core mystery will soon be solved. You are exactly where you were always meant to be.",daily:"The universe is sending you a sign today. It is subtle, so stay quiet enough to hear it."}},
-  {id:130,name:"Gyarados",type:"water",keyword:"Hardened Victory",readings:{past:"You spent years being underestimated. That frustration was fuel for the leap you eventually took.",present:"The power you hold is immense and volatile. Mastery of self is now your most important task.",future:"A massive wave of change is coming. You are the only one strong enough to ride it.",daily:"The struggle was worth it. Remind yourself how far you have come from the splash to the roar."}},
-  {id:131,name:"Lapras",type:"water",keyword:"Safe Passage",readings:{past:"You carried heavy burdens for others across deep waters. It is time to honor that labor.",present:"The currents are calm right now. Take this moment to rest and exist in the vastness.",future:"A gentle arrival is coming. You will reach a shore where you are finally the one supported.",daily:"You don't have to navigate today alone. Allow yourself to be the passenger for once."}},
-  {id:132,name:"Ditto",type:"normal",keyword:"Selfhood",readings:{past:"You spent years borrowing the shapes of others. You forgot your own original face.",present:"Today is about stripping away the masks. Find the simple core of who you actually are.",future:"Once you know your true form, you can consciously choose which face to show the world.",daily:"Identity is flexible. If you don't like the 'shape' of your current mood, you can change it."}},
-  {id:133,name:"Eevee",type:"normal",keyword:"Infinite Potential",readings:{past:"Your path was intentionally open. Uncertainty was actually a gift of total freedom.",present:"Endless possibilities sit before you. You do not have to choose just one version of yourself.",future:"A spectacular transformation is on the horizon. Your evolution will be breathtakingly clear.",daily:"You are a blank slate today. Experiment with a new hobby—you contain every outcome."}},
-  {id:143,name:"Snorlax",type:"normal",keyword:"Sacred Rest",readings:{past:"You pushed beyond your limits. Your past was a marathon that required a full stop.",present:"Permission is granted to be still. Productivity is not the measure of your worth.",future:"After this season of deep rest, you will rise with a strength that surprises even you.",daily:"The world can wait. If you are feeling heavy, it is a signal from your soul to recharge."}},
-  {id:149,name:"Dragonite",type:"dragon",keyword:"Benevolence",readings:{past:"Represented kindness in a time where everyone was fighting for scrap. You chose to help.",present:"Kindness is your primary power. Use your strength to lift up those who cannot fly yet.",future:"Legendary peace awaits you. Your future is one of high altitudes and wide, calm perspectives.",daily:"Extend a hand to someone today. Your inner dragon is strongest when it is protecting things."}},
-  {id:150,name:"Mewtwo",type:"psychic",keyword:"The Awakening",readings:{past:"You were defined by rules you did not choose. You have broken those chains completely.",present:"Claim your own name and purpose. You are the architect of your own reality today.",future:"A brand new story is beginning. Walk into a future that you designed yourself.",daily:"Master your thoughts today. You are not a victim of circumstances, but a creator of destiny."}},
-  {id:151,name:"Mew",type:"psychic",keyword:"Beginner Curiosity",readings:{past:"You began with a spirit of play and innocence. That foundation is still alive inside you.",present:"Approach every problem with curiosity rather than strategy. Play is the most productive work.",future:"Secrets will soon reveal themselves, but only if you maintain the wonder of a beginner.",daily:"Look at your surroundings as if seeing them for the first time. Magic is everywhere."}}
-];
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-5-2 Oracle</title>
+<script src="https://js.puter.com/v2/"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body { 
+    background: #0a0614; 
+    min-height: 100vh; 
+    font-family: 'Crimson Pro', serif; 
+    color: #e8dfc8; 
+    overflow-x: hidden; 
+  }
+
+  .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; background: radial-gradient(ellipse at 20% 20%, #1a0a2e 0%, #0a0614 60%); }
+  .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
+  @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+
+  .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 20px 20px 60px; text-align: center; }
+  
+  .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 40px; }
+  
+  .draw-btn { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #0a0614; background: linear-gradient(135deg, #f0c040, #e0a020); border: none; padding: 16px 44px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(240,192,64,0.3); }
+  .draw-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(240,192,64,0.5); }
+  .draw-btn:active { transform: scale(0.98); }
+  
+  .daily-btn { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; background: transparent; border: 1px solid rgba(157,143,192,0.4); padding: 10px 28px; border-radius: 50px; cursor: pointer; transition: all 0.3s; }
+  .daily-btn:hover { color: #f0c040; border-color: #f0c040; }
+
+  .title { font-family: 'Cinzel', serif; font-size: clamp(22px, 4vw, 38px); font-weight: 700; color: #f0c040; letter-spacing: 4px; text-shadow: 0 0 30px rgba(240,192,64,0.5); margin-bottom: 6px; }
+  .subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; color: #9d8fc0; margin-bottom: 30px; letter-spacing: 2px; }
+
+  .spread-labels { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; flex-wrap: wrap; transition: opacity 0.5s; }
+  .spread-label { width: 180px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: #9d8fc0; text-transform: uppercase; }
+
+  .cards-area { display: flex; justify-content: center; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .card-slot { width: 180px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .card { width: 180px; height: 280px; position: relative; cursor: pointer; perspective: 1000px; }
+  .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  
+  .card-back, .card-front { position: absolute; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; border: 1px solid rgba(240,192,64,0.3); overflow: hidden; }
+  .card-back { background: linear-gradient(135deg, #1a0a2e 0%, #0d1a3e 50%, #1a0a2e 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .card-back-symbol { font-size: 52px; opacity: 0.6; filter: drop-shadow(0 0 10px rgba(240,192,64,0.4)); }
+
+  .card-front { transform: rotateY(180deg); background: #0f0820; display: flex; flex-direction: column; }
+  
+  /* Opposite Color Scheme for Daily Card */
+  .daily-mode .card-front { background: #e8dfc8; color: #0a0614; border: 2px solid #f0c040; }
+  .daily-mode .card-name { color: #0a0614 !important; border-top: 1px solid rgba(0,0,0,0.1) !important; }
+  .daily-mode .card-type-banner { border-bottom: 1px solid rgba(0,0,0,0.1) !important; color: #0a0614 !important; }
+  .daily-mode .card-keyword { color: #0a0614 !important; }
+
+  .card-type-banner { padding: 8px 10px 6px; text-align: center; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .card-art-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px; }
+  .card-art-img { width: 90px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); image-rendering: pixelated; }
+  .card-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; text-align: center; padding: 8px 10px 8px; border-top: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px; }
+  .card-keyword { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-align: center; padding: 4px 8px 8px; text-transform: uppercase; color: #f0c040; }
+
+  .card-reading { width: 180px; min-height: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(240,192,64,0.15); border-radius: 12px; padding: 14px; opacity: 0; transition: opacity 0.6s ease 0.6s; text-align: left; }
+  .card-reading.visible { opacity: 1; }
+  .reading-position { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; margin-bottom: 8px; }
+  .reading-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 14px; line-height: 1.6; color: #c8bfa0; }
+
+  .oracle-message { margin-top: 20px; padding: 24px 32px; background: rgba(240,192,64,0.05); border: 1px solid rgba(240,192,64,0.2); border-radius: 16px; max-width: 700px; margin-left: auto; margin-right: auto; opacity: 0; transition: opacity 1s; }
+  .oracle-message.visible { opacity: 1; }
+  .oracle-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #f0c040; margin-bottom: 12px; }
+  .oracle-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 17px; line-height: 1.8; color: #d8ccb0; }
+
+  @media (max-width: 600px) {
+    .spread-label { width: 30vw; font-size: 9px; }
+    .cards-area:not(.daily-mode) .card-slot, .cards-area:not(.daily-mode) .card, .cards-area:not(.daily-mode) .card-reading { width: 30vw; }
+    .cards-area:not(.daily-mode) .card { height: 46vw; }
+    .cards-area:not(.daily-mode) .card-art-img { width: 50px; }
+    .draw-btn { padding: 14px 32px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="container">
+  
+  <div class="btn-group">
+    <button class="draw-btn" id="drawBtn" onclick="drawCards()">Full Spread</button>
+    <button class="daily-btn" id="dailyBtn" onclick="drawDaily()">Daily Insight</button>
+  </div>
+
+  <div class="title">✦ 1-5-2 Oracle ✦</div>
+  <div class="subtitle">Seek wisdom from the ancient Pokédex</div>
+
+  <div class="spread-labels" id="labels">
+    <div class="spread-label">Past</div>
+    <div class="spread-label">Present</div>
+    <div class="spread-label">Future</div>
+  </div>
+
+  <div class="cards-area" id="cardsArea">
+    <div class="card-slot" id="slot0"><div class="card" id="card0"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">☽</div></div><div class="card-front" id="front0"></div></div></div><div class="card-reading" id="reading0"><div class="reading-position">☽ Past</div><div class="reading-text" id="readingText0"></div></div></div>
+    <div class="card-slot" id="slot1"><div class="card" id="card1"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">☀</div></div><div class="card-front" id="front1"></div></div></div><div class="card-reading" id="reading1"><div class="reading-position" id="posText1">☀ Present</div><div class="reading-text" id="readingText1"></div></div></div>
+    <div class="card-slot" id="slot2"><div class="card" id="card2"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">★</div></div><div class="card-front" id="front2"></div></div></div><div class="card-reading" id="reading2"><div class="reading-position">★ Future</div><div class="reading-text" id="readingText2"></div></div></div>
+  </div>
+
+  <div class="oracle-message" id="oracleMsg">
+    <div class="oracle-title">✦ The Oracle Speaks ✦</div>
+    <div class="oracle-text" id="oracleMsgText"></div>
+  </div>
+</div>
+
+<script>
+
+<<<<<<<<<<<<<<Insert Pokémon list here>>>>>>>>>>>
 
 const positions = ["past","present","future"];
 let drawn = [];
@@ -156,11 +260,12 @@ function clearSpread() {
 }
 
 function buildCardFront(poke) {
-  const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
+  // Logic to handle MissingNo image from fossil sprite
+  const spriteUrl = poke.id === 0 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png" : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
   return `
     <div class="card-type-banner">✦ ${poke.type.toUpperCase()} ✦</div>
-    <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}"></div>
-    <div class="card-name">${poke.name}</div>
+    <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png'"></div>
+    <div class="card-name" style="color:#f0c040">${poke.name}</div>
     <div class="card-keyword">✦ ${poke.keyword} ✦</div>
   `;
 }
@@ -193,12 +298,112 @@ async function drawCards() {
     document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
     document.getElementById('oracleMsg').classList.add('visible');
     try {
-      // AI PROMPT UPDATED: No parentheses or "Hardened Victory" style labels
-      const prompt = `Mystical oracle story. Past ${drawn[0].name}, Present ${drawn[1].name}, Future ${drawn[2].name}. Summarize their combined message in 3 sentences. Do not use parentheses or quote their themes. No dashes.`;
+      const prompt = `Mystical tarot master story. Past ${drawn[0].name}, Present ${drawn[1].name}, Future ${drawn[2].name}. Summarize their combined message in 3 atmospheric sentences. Do not use parentheses or mention keywords. No dashes.`;
       const response = await puter.ai.chat(prompt);
       document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
     } catch (err) {
-      document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! Try again in a moment.";
+      document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! The spirits vanished. Try again.";
+    }
+  }, 1600);
+}
+
+function drawDaily() {
+  clearSpread();
+  document.getElementById('cardsArea').classList.add('daily-mode');
+  const dailyPoke = pokemon[Math.floor(Math.random()*pokemon.length)];
+  document.getElementById('front1').innerHTML = buildCardFront(dailyPoke);
+  document.getElementById('labels').style.opacity = '0';
+  document.getElementById('slot0').style.display = 'none';
+  document.getElementById('slot2').style.display = 'none';
+  document.getElementById('posText1').textContent = "☀ Daily Insight";
+  
+  setTimeout(() => {
+    document.getElementById('card1').classList.add('flipped');
+    document.getElementById('readingText1').textContent = dailyPoke.readings.daily;
+    document.getElementById('reading1').classList.add('visible');
+    document.getElementById('oracleMsg').classList.add('visible');
+    document.getElementById('oracleMsgText').textContent = `${dailyPoke.name} brings a unique message. Look inward to find how this energy applies to your current path.`;
+  }, 200);
+}
+
+createStars();
+</script>
+</body>
+</html>
+
+const positions = ["past","present","future"];
+let drawn = [];
+
+function createStars() {
+  const container = document.getElementById('stars');
+  for(let i=0; i<100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random()*2+0.5;
+    star.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;`;
+    container.appendChild(star);
+  }
+}
+
+function clearSpread() {
+    drawn = [];
+    document.getElementById('cardsArea').classList.remove('daily-mode');
+    document.getElementById('labels').style.opacity = '1';
+    document.getElementById('slot0').style.display = 'flex';
+    document.getElementById('slot2').style.display = 'flex';
+    document.getElementById('posText1').textContent = "☀ Present";
+    document.getElementById('oracleMsg').classList.remove('visible');
+    [0,1,2].forEach(i => {
+        document.getElementById('card'+i).classList.remove('flipped');
+        document.getElementById('reading'+i).classList.remove('visible');
+        document.getElementById('front'+i).innerHTML = '';
+    });
+}
+
+function buildCardFront(poke) {
+  // Logic to handle MissingNo image from fossil sprite
+  const spriteUrl = poke.id === 0 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png" : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
+  return `
+    <div class="card-type-banner">✦ ${poke.type.toUpperCase()} ✦</div>
+    <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png'"></div>
+    <div class="card-name" style="color:#f0c040">${poke.name}</div>
+    <div class="card-keyword">✦ ${poke.keyword} ✦</div>
+  `;
+}
+
+function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
+async function drawCards() {
+  clearSpread();
+  const shuffled = shuffle([...pokemon]);
+  drawn = shuffled.slice(0,3);
+
+  drawn.forEach((poke, i) => {
+    document.getElementById('front'+i).innerHTML = buildCardFront(poke);
+    setTimeout(() => {
+      document.getElementById('card'+i).classList.add('flipped');
+      document.getElementById('readingText'+i).textContent = poke.readings[positions[i]];
+      document.getElementById('reading'+i).classList.add('visible');
+    }, (i + 1) * 400);
+  });
+
+  setTimeout(async () => {
+    document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
+    document.getElementById('oracleMsg').classList.add('visible');
+    try {
+      const prompt = `Mystical tarot master story. Past ${drawn[0].name}, Present ${drawn[1].name}, Future ${drawn[2].name}. Summarize their combined message in 3 atmospheric sentences. Do not use parentheses or mention keywords. No dashes.`;
+      const response = await puter.ai.chat(prompt);
+      document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
+    } catch (err) {
+      document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! The spirits vanished. Try again.";
     }
   }, 1600);
 }
