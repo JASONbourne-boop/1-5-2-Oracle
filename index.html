@@ -6,44 +6,144 @@
 <script src="https://js.puter.com/v2/"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0a0614; min-height: 100vh; font-family: 'Crimson Pro', serif; color: #e8dfc8; overflow-x: hidden; }
-  .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; background: radial-gradient(ellipse at 20% 20%, #1a0a2e 0%, #0a0614 60%); }
-  .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
+
+  body {
+    background: #0a0614;
+    min-height: 100vh;
+    font-family: 'Crimson Pro', serif;
+    color: #e8dfc8;
+    overflow-x: hidden;
+  }
+
+  .stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse at 20% 20%, #1a0a2e 0%, #0a0614 60%);
+  }
+
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+  }
+
   @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 1; } }
-  .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 40px 20px 60px; text-align: center; }
-  .title { font-family: 'Cinzel', serif; font-size: clamp(22px, 4vw, 38px); font-weight: 700; color: #f0c040; letter-spacing: 4px; text-shadow: 0 0 30px rgba(240,192,64,0.5); margin-bottom: 6px; }
-  .subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; color: #9d8fc0; margin-bottom: 40px; letter-spacing: 2px; }
-  .spread-labels { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; flex-wrap: wrap; }
-  .spread-label { width: 180px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: #9d8fc0; text-transform: uppercase; }
-  .cards-area { display: flex; justify-content: center; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
-  .card-slot { width: 180px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .card { width: 180px; height: 280px; position: relative; cursor: pointer; perspective: 1000px; }
-  .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 40px 20px 60px;
+    text-align: center;
+  }
+
+  .title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 700;
+    color: #f0c040;
+    letter-spacing: 4px;
+    text-shadow: 0 0 30px rgba(240,192,64,0.5);
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #9d8fc0;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  .spread-labels {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .spread-label {
+    width: 180px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #9d8fc0;
+    text-transform: uppercase;
+  }
+
+  .cards-area {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .card-slot {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .card {
+    width: 180px;
+    height: 280px;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+  }
+
+  .card-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   .card.flipped .card-inner { transform: rotateY(180deg); }
-  .card-back, .card-front { position: absolute; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; border: 1px solid rgba(240,192,64,0.3); overflow: hidden; }
-  .card-back { background: linear-gradient(135deg, #1a0a2e 0%, #0d1a3e 50%, #1a0a2e 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+
+  .card-back, .card-front {
+    position: absolute; width: 100%; height: 100%;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    border: 1px solid rgba(240,192,64,0.3);
+    overflow: hidden;
+  }
+
+  .card-back {
+    background: linear-gradient(135deg, #1a0a2e 0%, #0d1a3e 50%, #1a0a2e 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+  }
+
   .card-back-symbol { font-size: 52px; opacity: 0.6; filter: drop-shadow(0 0 10px rgba(240,192,64,0.4)); }
   .card-back-text { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: rgba(240,192,64,0.5); text-transform: uppercase; }
-  .card-back-grid { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(240,192,64,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(240,192,64,0.04) 1px, transparent 1px); background-size: 20px 20px; }
-  .card-back-border { position: absolute; inset: 8px; border: 1px solid rgba(240,192,64,0.2); border-radius: 10px; }
+
   .card-front { transform: rotateY(180deg); background: #0f0820; display: flex; flex-direction: column; }
+
   .card-type-banner { padding: 8px 10px 6px; text-align: center; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .card-art-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px; position: relative; }
   .card-art-img { position: relative; z-index: 1; width: 90px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); image-rendering: pixelated; }
   .card-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; text-align: center; padding: 8px 10px 4px; border-top: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px; }
-  .card-number { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 10px; color: rgba(255,255,255,0.4); text-align: center; padding-bottom: 6px; }
   .card-keyword { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-align: center; padding: 4px 8px 8px; text-transform: uppercase; }
+
   .card-reading { width: 180px; min-height: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(240,192,64,0.15); border-radius: 12px; padding: 14px; opacity: 0; transition: opacity 0.6s ease 0.6s; text-align: left; }
   .card-reading.visible { opacity: 1; }
   .reading-position { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; margin-bottom: 8px; }
   .reading-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 14px; line-height: 1.6; color: #c8bfa0; }
+
   .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
-  .draw-btn { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #0a0614; background: linear-gradient(135deg, #f0c040, #e0a020); border: none; padding: 16px 48px; border-radius: 50px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(240,192,64,0.3); }
+  .draw-btn { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #0a0614; background: linear-gradient(135deg, #f0c040, #e0a020); border: none; padding: 16px 48px; border-radius: 50px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(240,192,64,0.3); }
   .secondary-btns { display: flex; gap: 12px; }
   .reset-btn, .daily-btn { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; background: transparent; border: 1px solid rgba(157,143,192,0.3); padding: 10px 28px; border-radius: 50px; cursor: pointer; }
   .reset-btn { display: none; }
   .reset-btn.visible { display: inline-block; }
+
   .oracle-message { margin-top: 40px; padding: 24px 32px; background: rgba(240,192,64,0.05); border: 1px solid rgba(240,192,64,0.2); border-radius: 16px; max-width: 700px; margin-left: auto; margin-right: auto; opacity: 0; transition: opacity 1s ease 1s; }
   .oracle-message.visible { opacity: 1; }
   .oracle-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #f0c040; margin-bottom: 12px; }
@@ -51,7 +151,7 @@
 
   @media (max-width: 600px) {
     .spread-labels { gap: 10px; flex-wrap: nowrap; }
-    .spread-label { width: 30vw; font-size: 10px; letter-spacing: 1px; }
+    .spread-label { width: 30vw; font-size: 10px; }
     .cards-area { gap: 10px; flex-wrap: nowrap; }
     .cards-area:not(.daily-mode) .card-slot, .cards-area:not(.daily-mode) .card, .cards-area:not(.daily-mode) .card-reading { width: 30vw; }
     .cards-area:not(.daily-mode) .card { height: 46vw; }
@@ -73,9 +173,9 @@
     <div class="spread-label">Future</div>
   </div>
   <div class="cards-area" id="cardsArea">
-    <div class="card-slot" id="slot0"><div class="card" id="card0"><div class="card-inner"><div class="card-back"><div class="card-back-grid"></div><div class="card-back-border"></div><div class="card-back-symbol">☽</div><div class="card-back-text">Past</div></div><div class="card-front" id="front0"></div></div></div><div class="card-reading" id="reading0"><div class="reading-position">☽ Past</div><div class="reading-text" id="readingText0"></div></div></div>
-    <div class="card-slot" id="slot1"><div class="card" id="card1"><div class="card-inner"><div class="card-back"><div class="card-back-grid"></div><div class="card-back-border"></div><div class="card-back-symbol">☀</div><div class="card-back-text">Insight</div></div><div class="card-front" id="front1"></div></div></div><div class="card-reading" id="reading1"><div class="reading-position" id="posText1">☀ Present</div><div class="reading-text" id="readingText1"></div></div></div>
-    <div class="card-slot" id="slot2"><div class="card" id="card2"><div class="card-inner"><div class="card-back"><div class="card-back-grid"></div><div class="card-back-border"></div><div class="card-back-symbol">★</div><div class="card-back-text">Future</div></div><div class="card-front" id="front2"></div></div></div><div class="card-reading" id="reading2"><div class="reading-position">★ Future</div><div class="reading-text" id="readingText2"></div></div></div>
+    <div class="card-slot" id="slot0"><div class="card" id="card0"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">☽</div><div class="card-back-text">Past</div></div><div class="card-front" id="front0"></div></div></div><div class="card-reading" id="reading0"><div class="reading-position">☽ Past</div><div class="reading-text" id="readingText0"></div></div></div>
+    <div class="card-slot" id="slot1"><div class="card" id="card1"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">☀</div><div class="card-back-text">Insight</div></div><div class="card-front" id="front1"></div></div></div><div class="card-reading" id="reading1"><div class="reading-position" id="posText1">☀ Present</div><div class="reading-text" id="readingText1"></div></div></div>
+    <div class="card-slot" id="slot2"><div class="card" id="card2"><div class="card-inner"><div class="card-back"><div class="card-back-symbol">★</div><div class="card-back-text">Future</div></div><div class="card-front" id="front2"></div></div></div><div class="card-reading" id="reading2"><div class="reading-position">★ Future</div><div class="reading-text" id="readingText2"></div></div></div>
   </div>
   <div class="btn-group">
     <button class="draw-btn" id="drawBtn" onclick="drawCards()">Full Spread</button>
@@ -93,18 +193,41 @@
 <script>
 const pokemon = [
   {id:1,name:"Bulbasaur",type:"grass",keyword:"Patience",readings:{past:"Sown in stillness.",present:"Mid-bloom trust.",future:"Slow growth is strong."}},
-  {id:4,name:"Charmander",type:"fire",keyword:"Inner Flame",readings:{past:"A spark was lit.",present:"Protect your fire.",future:"Light the way."}},
-  {id:7,name:"Squirtle",type:"water",keyword:"Protected Heart",readings:{past:"Shell was wisdom.",present:"Flow with the water.",future:"Gentleness is armor."}},
-  {id:25,name:"Pikachu",type:"electric",keyword:"Joyful Energy",readings:{past:"Guided by joy.",present:"Shine your light.",future:"Bridge two worlds."}},
-  {id:94,name:"Gengar",type:"ghost",keyword:"Integration",readings:{past:"Faced the shadow.",present:"Own your depth.",future:"Dark and light unite."}},
-  {id:133,name:"Eevee",type:"normal",keyword:"Potential",readings:{past:"Path was open.",present:"Endless possibility.",future:"Spectacular evolution."}},
-  {id:150,name:"Mewtwo",type:"psychic",keyword:"Origin",readings:{past:"Made by others.",present:"You are your own story.",future:"Choose power with love."}},
-  {id:151,name:"Mew",type:"psychic",keyword:"Possibility",readings:{past:"Pure potential.",present:"Everything is open.",future:"Play unlocks strategy."}}
-  // ... more pokemon can be added here
+  {id:2,name:"Ivysaur",type:"grass",keyword:"Transition",readings:{past:"Outgrew the seed.",present:"Ready to open.",future:"Focus on the bud."}},
+  {id:3,name:"Venusaur",type:"grass",keyword:"Abundance",readings:{past:"Grown through storms.",present:"Full bloom power.",future:"Share your harvest."}},
+  {id:4,name:"Charmander",type:"fire",keyword:"Inner Flame",readings:{past:"A spark was lit.",present:"Protect your fire.",future:"Feed your purpose."}},
+  {id:5,name:"Charmeleon",type:"fire",keyword:"Intensity",readings:{past:"Forged in heat.",present:"Sharp edge season.",future:"Channel the burn."}},
+  {id:6,name:"Charizard",type:"fire",keyword:"Sovereignty",readings:{past:"Expectations burned.",present:"Spread your wings.",future:"Claim your sky."}},
+  {id:7,name:"Squirtle",type:"water",keyword:"Protected Heart",readings:{past:"Shell was wisdom.",present:"Flow with ease.",future:"Gentleness is armor."}},
+  {id:8,name:"Wartortle",type:"water",keyword:"Depth",readings:{past:"Murky navigation.",present:"Mastering emotions.",future:"Still waters reveal."}},
+  {id:9,name:"Blastoise",type:"water",keyword:"Force",readings:{past:"Contained pressure.",present:"Focused intention.",future:"Lead the current."}},
+  {id:10,name:"Caterpie",type:"bug",keyword:"Beginnings",readings:{past:"Sacred soft start.",present:"Fuel the change.",future:"Trust the crawl."}},
+  {id:11,name:"Metapod",type:"bug",keyword:"Stillness",readings:{past:"Outward work ends.",present:"Inward becoming.",future:"Timing is perfect."}},
+  {id:12,name:"Butterfree",type:"bug",keyword:"Liberation",readings:{past:"Hidden struggle.",present:"Dry your wings.",future:"Leave the garden."}},
+  {id:13,name:"Weedle",type:"bug",keyword:"Warning",readings:{past:"Signals ignored.",present:"Set boundaries.",future:"Respect your edges."}},
+  {id:14,name:"Kakuna",type:"bug",keyword:"Endurance",readings:{past:"Silent holding.",present:"Emergence nears.",future:"Prepare for life."}},
+  {id:15,name:"Beedrill",type:"bug",keyword:"Protection",readings:{past:"Defended values.",present:"Act from love.",future:"Rally the swarm."}},
+  {id:16,name:"Pidgey",type:"flying",keyword:"Adaptability",readings:{past:"Simple skies.",present:"Read the air.",future:"Small wings fly far."}},
+  {id:17,name:"Pidgeotto",type:"flying",keyword:"Territory",readings:{past:"Claimed a space.",present:"Guard your energy.",future:"Expand the range."}},
+  {id:18,name:"Pidgeot",type:"flying",keyword:"Direction",readings:{past:"Speed saved you.",present:"Fly with intent.",future:"Destination is clear."}},
+  {id:19,name:"Rattata",type:"normal",keyword:"Resourceful",readings:{past:"Survivors heart.",present:"Use what exists.",future:"Ingenuity wins."}},
+  {id:20,name:"Raticate",type:"normal",keyword:"Tenacity",readings:{past:"Underestimated.",present:"Keep gnawing.",future:"The wall breaks."}},
+  {id:25,name:"Pikachu",type:"electric",keyword:"Joy",readings:{past:"Childlike spark.",present:"Shine without fear.",future:"Connect the dots."}},
+  {id:26,name:"Raichu",type:"electric",keyword:"Aura",readings:{past:"Stored potential.",present:"Release the charge.",future:"Light the world."}},
+  {id:37,name:"Vulpix",type:"fire",keyword:"Mystique",readings:{past:"Undecoded past.",present:"Mystery is asset.",future:"The right see you."}},
+  {id:38,name:"Ninetales",type:"fire",keyword:"Fate",readings:{past:"Long memories.",present:"Ancient wisdom.",future:"Cycles conclude."}},
+  {id:39,name:"Jigglypuff",type:"normal",keyword:"Expression",readings:{past:"Quietly shared.",present:"Create for joy.",future:"Find your voice."}},
+  {id:54,name:"Psyduck",type:"water",keyword:"Clarity",readings:{past:"Internal pressure.",present:"Overwhelm speaks.",future:"Release is light."}},
+  {id:63,name:"Abra",type:"psychic",keyword:"Teleport",readings:{past:"Quick retreats.",present:"Stay in body.",future:"Mind opens doors."}},
+  {id:94,name:"Gengar",type:"ghost",keyword:"Integration",readings:{past:"Shadow work.",present:"Laugh at fears.",future:"Whole self power."}},
+  {id:131,name:"Lapras",type:"water",keyword:"Safe Passage",readings:{past:"Carried others.",present:"Gentle currents.",future:"Renewed arrival."}},
+  {id:132,name:"Ditto",type:"normal",keyword:"Selfhood",readings:{past:"Borrowed shapes.",present:"Core discovery.",future:"Choose your face."}},
+  {id:133,name:"Eevee",type:"normal",keyword:"Potential",readings:{past:"Open paths.",present:"Endless choice.",future:"Perfect evolution."}},
+  {id:143,name:"Snorlax",type:"normal",keyword:"Rest",readings:{past:"Sacred nap.",present:"Permission granted.",future:"Rise refreshed."}},
+  {id:149,name:"Dragonite",type:"dragon",keyword:"Benevolence",readings:{past:"Fierce travel.",present:"Kindness is power.",future:"Legendary peace."}},
+  {id:150,name:"Mewtwo",type:"psychic",keyword:"Awakening",readings:{past:"Created by rules.",present:"Claim your name.",future:"New origin story."}},
+  {id:151,name:"Mew",type:"psychic",keyword:"Curiosity",readings:{past:"Pure beginning.",present:"Play is work.",future:"Secrets revealed."}}
 ];
-
-const positions = ["past","present","future"];
-let drawn = [];
 
 function createStars() {
   const container = document.getElementById('stars');
@@ -127,10 +250,23 @@ function buildCardFront(poke) {
   `;
 }
 
+// THE GOLD STANDARD SHUFFLE (FISHER-YATES)
+function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
 async function drawCards() {
   document.getElementById('drawBtn').disabled = true;
   document.getElementById('dailyBtn').disabled = true;
-  const shuffled = [...pokemon].sort(()=>Math.random()-0.5);
+  
+  // Shuffle the entire deck every time
+  const shuffled = shuffle([...pokemon]);
   drawn = shuffled.slice(0,3);
 
   drawn.forEach((poke, i) => {
@@ -145,9 +281,8 @@ async function drawCards() {
   document.getElementById('oracleMsgText').textContent = "Consulting the digital spirits...";
   document.getElementById('oracleMsg').classList.add('visible');
 
-  // NO-KEY AI CALL VIA PUTER.JS
   try {
-    const prompt = `Act as a mystical oracle. Summarize these Pokémon themes: Past ${drawn[0].keyword}, Present ${drawn[1].keyword}, Future ${drawn[2].keyword}. 3 short sentences. No dashes.`;
+    const prompt = `Mystical oracle summary. Past ${drawn[0].keyword}, Present ${drawn[1].keyword}, Future ${drawn[2].keyword}. 3 short sentences. No dashes.`;
     const response = await puter.ai.chat(prompt);
     document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
     document.getElementById('resetBtn').classList.add('visible');
@@ -160,7 +295,9 @@ function drawDaily() {
   document.getElementById('drawBtn').disabled = true;
   document.getElementById('dailyBtn').disabled = true;
   document.getElementById('cardsArea').classList.add('daily-mode');
+  
   const dailyPoke = pokemon[Math.floor(Math.random()*pokemon.length)];
+  
   document.getElementById('front1').innerHTML = buildCardFront(dailyPoke);
   document.getElementById('labels').style.opacity = '0';
   document.getElementById('slot0').style.display = 'none';
@@ -177,7 +314,7 @@ function drawDaily() {
 }
 
 function resetReading() {
-  location.reload(); // Simplest way to reset Puter.js state
+  location.reload();
 }
 
 createStars();
