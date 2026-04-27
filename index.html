@@ -716,8 +716,8 @@ async function fetchAIOracleMessage() {
   
   const apiKey = "AIzaSyCcEG1VTR2E6s2O_VqWRPsNSND2Np0OouU";
   
-  if (!apiKey) {
-    return "The spirits remain quiet.";
+  if (!apiKey || apiKey === "PASTE_YOUR_API_KEY_HERE") {
+    return "The spirits remain quiet. API key is missing.";
   }
 
   const promptText = `Act as a mystical oracle reader. I just drew three cards for a 1-5-2 Oracle reading using Pokémon themes. 
@@ -732,12 +732,22 @@ async function fetchAIOracleMessage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
     });
-    const data = await response.json();
-    let text = data.candidates[0].content.parts[0].text;
     
-    return text.replace(/—|–/g, '-');
+    const data = await response.json();
+    
+    if (data.error) {
+        return `API Error: ${data.error.code} - ${data.error.message}`;
+    }
+    
+    if (data.candidates && data.candidates.length > 0) {
+        let text = data.candidates[0].content.parts[0].text;
+        return text.replace(/—|–/g, '-');
+    } else {
+        return "The API connected, but returned an empty response.";
+    }
+    
   } catch (error) {
-    return "The connection to the digital spirits was interrupted. Please check your internet connection.";
+    return `System Error: ${error.message}. (Check if the app has internet access).`;
   }
 }
 
