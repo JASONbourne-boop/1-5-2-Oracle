@@ -228,7 +228,7 @@
 
 <script>
 
-<<<<<<<<<<<<<<Insert Pokémon list here>>>>>>>>>>>
+<<<<<<<<<<<<<<Insert Full Pokémon list here>>>>>>>>>>>
 
 const positions = ["past","present","future"];
 let drawn = [];
@@ -249,6 +249,7 @@ function clearSpread() {
     document.getElementById('cardsArea').classList.remove('daily-mode');
     document.getElementById('labels').style.opacity = '1';
     document.getElementById('slot0').style.display = 'flex';
+    document.getElementById('slot1').style.display = 'flex';
     document.getElementById('slot2').style.display = 'flex';
     document.getElementById('posText1').textContent = "☀ Present";
     document.getElementById('oracleMsg').classList.remove('visible');
@@ -260,12 +261,11 @@ function clearSpread() {
 }
 
 function buildCardFront(poke) {
-  // Logic to handle MissingNo image from fossil sprite
   const spriteUrl = poke.id === 0 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png" : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
   return `
     <div class="card-type-banner">✦ ${poke.type.toUpperCase()} ✦</div>
     <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png'"></div>
-    <div class="card-name" style="color:#f0c040">${poke.name}</div>
+    <div class="card-name">${poke.name}</div>
     <div class="card-keyword">✦ ${poke.keyword} ✦</div>
   `;
 }
@@ -350,6 +350,7 @@ function clearSpread() {
     document.getElementById('cardsArea').classList.remove('daily-mode');
     document.getElementById('labels').style.opacity = '1';
     document.getElementById('slot0').style.display = 'flex';
+    document.getElementById('slot1').style.display = 'flex';
     document.getElementById('slot2').style.display = 'flex';
     document.getElementById('posText1').textContent = "☀ Present";
     document.getElementById('oracleMsg').classList.remove('visible');
@@ -361,12 +362,11 @@ function clearSpread() {
 }
 
 function buildCardFront(poke) {
-  // Logic to handle MissingNo image from fossil sprite
   const spriteUrl = poke.id === 0 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png" : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
   return `
     <div class="card-type-banner">✦ ${poke.type.toUpperCase()} ✦</div>
     <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png'"></div>
-    <div class="card-name" style="color:#f0c040">${poke.name}</div>
+    <div class="card-name">${poke.name}</div>
     <div class="card-keyword">✦ ${poke.keyword} ✦</div>
   `;
 }
