@@ -714,8 +714,8 @@ function drawDaily() {
 async function fetchAIOracleMessage() {
   const [past, present, future] = drawn;
   
-  const apiKey = "AIzaSyByB46W8C8QHS6cbVm-LO9HCc-mns1HVIE";
-  
+  const apiKey = "AIzaSyBaYjDQO3Pom_UnPiW75NzUSRcZQuRyUh4";
+
   if (!apiKey || apiKey === "PASTE_YOUR_API_KEY_HERE") {
     return "The spirits remain quiet. API key is missing.";
   }
@@ -732,7 +732,6 @@ async function fetchAIOracleMessage() {
     const data = await response.json();
     
     if (data.error) {
-        // Fun Pokemon error messages
         const errCode = data.error.code;
         if (errCode === 400) {
             return "PSYDUCK is confused! The API key isn't working.";
