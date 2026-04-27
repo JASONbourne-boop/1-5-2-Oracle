@@ -720,14 +720,10 @@ async function fetchAIOracleMessage() {
     return "The spirits remain quiet. API key is missing.";
   }
 
-  const promptText = `Act as a mystical oracle reader. I just drew three cards for a 1-5-2 Oracle reading using Pokémon themes. 
-  Past: ${past.name} (Theme: ${past.keyword}). 
-  Present: ${present.name} (Theme: ${present.keyword}). 
-  Future: ${future.name} (Theme: ${future.keyword}). 
-  Write a short, insightful 3 to 4 sentence reading connecting these specific themes into a cohesive narrative. Do not use em dashes or en dashes in your response.`;
+  const promptText = `Act as a mystical oracle reader. I just drew three cards for a 1-5-2 Oracle reading using Pokémon themes. \n  Past: ${past.name} (Theme: ${past.keyword}). \n  Present: ${present.name} (Theme: ${present.keyword}). \n  Future: ${future.name} (Theme: ${future.keyword}). \n  Write a short, insightful 3 to 4 sentence reading connecting these specific themes into a cohesive narrative. Do not use em dashes or en dashes in your response.`;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
