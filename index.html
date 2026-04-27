@@ -343,6 +343,17 @@
     line-height: 1.8;
     color: #d8ccb0;
   }
+  
+  .settings-link {
+    margin-top: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .settings-link:hover { color: rgba(255,255,255,0.6); }
 
   @media (max-width: 600px) {
     .spread-labels { gap: 10px; flex-wrap: nowrap; }
@@ -451,6 +462,8 @@
     <div class="oracle-title">✦ Your Oracle Reading ✦</div>
     <div class="oracle-text" id="oracleMsgText"></div>
   </div>
+  
+  <div class="settings-link" onclick="clearApiKey()">[ Reset API Key ]</div>
 </div>
 
 <script>
@@ -714,10 +727,14 @@ function drawDaily() {
 async function fetchAIOracleMessage() {
   const [past, present, future] = drawn;
   
-  const apiKey = "AIzaSyBaYjDQO3Pom_UnPiW75NzUSRcZQuRyUh4";
-
-  if (!apiKey || apiKey === "PASTE_YOUR_API_KEY_HERE") {
-    return "The spirits remain quiet. API key is missing.";
+  let apiKey = localStorage.getItem('pokemon_oracle_api_key');
+  
+  if (!apiKey) {
+    apiKey = prompt("Please enter your Gemini API Key to consult the digital spirits. (It will be saved securely on this device only).");
+    if (!apiKey || apiKey.trim() === "") {
+        return "Snorlax is blocking the path! (An API key is required for custom AI readings).";
+    }
+    localStorage.setItem('pokemon_oracle_api_key', apiKey.trim());
   }
 
   const promptText = `Act as a mystical oracle reader. I just drew three cards for a 1-5-2 Oracle reading using Pokémon themes. \n  Past: ${past.name} (Theme: ${past.keyword}). \n  Present: ${present.name} (Theme: ${present.keyword}). \n  Future: ${future.name} (Theme: ${future.keyword}). \n  Write a short, insightful 3 to 4 sentence reading connecting these specific themes into a cohesive narrative. Do not use em dashes or en dashes in your response.`;
@@ -734,7 +751,8 @@ async function fetchAIOracleMessage() {
     if (data.error) {
         const errCode = data.error.code;
         if (errCode === 400) {
-            return "PSYDUCK is confused! The API key isn't working.";
+            localStorage.removeItem('pokemon_oracle_api_key');
+            return "PSYDUCK is confused! The API key isn't working. (Please click 'Reset API Key' below and try a valid one).";
         }
         if (errCode === 404) {
             return "ABRA used TELEPORT! The digital spirits vanished. (Model not found).";
@@ -781,6 +799,11 @@ function resetReading() {
     document.getElementById('drawBtn').disabled = false; 
     document.getElementById('dailyBtn').disabled = false;
   }, 400);
+}
+
+function clearApiKey() {
+  localStorage.removeItem('pokemon_oracle_api_key');
+  alert("Your API Key has been safely erased from this device.");
 }
 
 createStars();
