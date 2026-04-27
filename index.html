@@ -52,6 +52,7 @@
     .cards-area { gap: 10px; flex-wrap: nowrap; }
     .cards-area:not(.daily-mode) .card-slot, .cards-area:not(.daily-mode) .card, .cards-area:not(.daily-mode) .card-reading { width: 30vw; }
     .cards-area:not(.daily-mode) .card { height: 46vw; }
+    .cards-area:not(.daily-mode) .card-back-symbol { font-size: 32px; }
     .cards-area:not(.daily-mode) .card-art-img { width: 50px; }
     .cards-area:not(.daily-mode) .reading-text { font-size: 10px; }
     .draw-btn { padding: 14px 32px; font-size: 12px; }
@@ -88,25 +89,25 @@
 
 <script>
 const pokemon = [
-  {id:1,name:"Bulbasaur",type:"grass",keyword:"Patience",readings:{past:"You sowed seeds in silence long ago. Now, look for the first signs of green breaking the soil.",present:"You are exactly where you need to be. Growth cannot be forced, only nurtured with steady care.",future:"Slow and steady progress will build roots so deep that no coming storm can shake your foundation."}},
-  {id:4,name:"Charmander",type:"fire",keyword:"Inner Flame",readings:{past:"A small spark was ignited in your past. It has been smoldering, waiting for the right breath of air.",present:"Keep your passion burning but contained. Do not let your intensity consume the very thing you love.",future:"Your inner light will eventually grow into a beacon that guides others through their own darkest moments."}},
-  {id:7,name:"Squirtle",type:"water",keyword:"Protected Heart",readings:{past:"You learned to carry your home and your defenses within you. That shell kept you safe through trials.",present:"Emotions are flowing like tides today. Do not resist the current; simply float and find your balance.",future:"Gentleness will be your strongest armor. Approaching future conflicts with a soft heart will ensure your victory."}},
-  {id:25,name:"Pikachu",type:"electric",keyword:"Joy",readings:{past:"A moment of pure, childlike electricity once defined your path. Remember that spark of unadulterated excitement.",present:"Radiate your energy outward without fear. Your natural vibration is meant to light up the room today.",future:"You will soon act as a bridge between two worlds, connecting people through your unique and bright spirit."}},
-  {id:94,name:"Gengar",type:"ghost",keyword:"Integration",readings:{past:"You spent a long time wrestling with your shadows. That conflict has finally sharpened your true perspective.",present:"Own your depth and your mystery. The parts of you that feel 'dark' are actually your greatest strengths.",future:"By integrating your fears into your power, you will become an unstoppable force of quiet, mischievous wisdom."}},
+  {id:1,name:"Bulbasaur",type:"grass",keyword:"Quiet Patience",readings:{past:"You sowed seeds in silence long ago. Now, look for the first signs of green breaking the soil.",present:"You are exactly where you need to be. Growth cannot be forced, only nurtured with steady care.",future:"Slow and steady progress will build roots so deep that no coming storm can shake your foundation."}},
+  {id:4,name:"Charmander",type:"fire",keyword:"The Inner Flame",readings:{past:"A small spark was ignited in your past. It has been smoldering, waiting for the right breath of air.",present:"Keep your passion burning but contained. Do not let your intensity consume the very thing you love.",future:"Your inner light will eventually grow into a beacon that guides others through their own darkest moments."}},
+  {id:7,name:"Squirtle",type:"water",keyword:"The Protected Heart",readings:{past:"You learned early to carry your home and your defenses within you. That shell kept you safe through trials.",present:"Emotions are flowing like tides today. Do not resist the current; simply float and find your balance.",future:"Gentleness will be your strongest armor. Approaching future conflicts with a soft heart will ensure your victory."}},
+  {id:25,name:"Pikachu",type:"electric",keyword:"Pure Joy",readings:{past:"A moment of pure, childlike electricity once defined your path. Remember that spark of unadulterated excitement.",present:"Radiate your energy outward without fear. Your natural vibration is meant to light up the room today.",future:"You will soon act as a bridge between two worlds, connecting people through your unique and bright spirit."}},
+  {id:94,name:"Gengar",type:"ghost",keyword:"Shadow Integration",readings:{past:"You spent a long time wrestling with your shadows. That conflict has finally sharpened your true perspective.",present:"Own your depth and your mystery. The parts of you that feel 'dark' are actually your greatest strengths.",future:"By integrating your fears into your power, you will become an unstoppable force of quiet, mischievous wisdom."}},
   {id:131,name:"Lapras",type:"water",keyword:"Safe Passage",readings:{past:"You have carried heavy burdens for others across very deep waters. It is time to honor that labor.",present:"The currents are calm right now. Take this moment to rest and simply exist in the vastness.",future:"A gentle arrival is coming. You will reach a new shore where you are finally the one supported."}},
-  {id:133,name:"Eevee",type:"normal",keyword:"Potential",readings:{past:"Your path was intentionally left open. The uncertainty of your past was actually a gift of total freedom.",present:"Endless possibilities sit before you. You do not have to choose just one version of yourself today.",future:"A spectacular transformation is on the horizon. When the time is right, your evolution will be breathtakingly clear."}},
-  {id:143,name:"Snorlax",type:"normal",keyword:"Rest",readings:{past:"You pushed yourself beyond your limits for too long. Your past was a marathon that required a stop.",present:"Permission is granted to be still. Productivity is not the measure of your worth in this moment.",future:"After this season of deep, sacred rest, you will rise with a strength that surprises even you."}},
-  {id:149,name:"Dragonite",type:"dragon",keyword:"Benevolence",readings:{past:"You traveled through fierce storms and emerged with your kindness intact. That was your greatest achievement yet.",present:"Kindness is your primary power today. Use your strength to lift up those who cannot fly yet.",future:"Legendary peace awaits you. Your future is one of high altitudes and wide, calm perspectives on life."}},
-  {id:150,name:"Mewtwo",type:"psychic",keyword:"Awakening",readings:{past:"You were defined by rules and origins you did not choose. You have broken those chains completely.",present:"Claim your own name and your own purpose. You are the architect of your own reality today.",future:"A brand new story is beginning. You will finally walk into a future that you designed yourself."}},
-  {id:151,name:"Mew",type:"psychic",keyword:"Curiosity",readings:{past:"You began with a spirit of pure play and innocence. That foundation is still alive inside you.",present:"Approach every problem with curiosity rather than strategy. Play is the most productive work you can do.",future:"Secrets will soon reveal themselves to you, but only if you maintain the wonder of a beginner."}},
-  {id:6,name:"Charizard",type:"fire",keyword:"Sovereignty",readings:{past:"You burned through old expectations that were holding you down. That fire cleared the way for flight.",present:"Spread your wings and take up space. You do not need anyone's permission to own your sky.",future:"You will soon reach a position of true authority where your fire protects rather than just burns."}},
-  {id:9,name:"Blastoise",type:"water",keyword:"Focused Force",readings:{past:"You held a tremendous amount of internal pressure for a long time. It was a heavy weight.",present:"Aim your intentions with absolute precision. Do not scatter your energy today; strike at the core.",future:"You will become the steady current that carries an entire community forward through difficult and rocky waters."}},
-  {id:3,name:"Venusaur",type:"grass",keyword:"Abundance",readings:{past:"You have weathered many seasons of drought and storm. You are now a master of survival.",present:"You are standing in the full power of your harvest. Recognize the richness that surrounds you now.",future:"Share your abundance with others. Your garden will only grow larger the more you give away."}},
-  {id:38,name:"Ninetales",type:"fire",keyword:"Fate",readings:{past:"Long memories and ancient patterns have shaped your journey. You are part of a larger cycle.",present:"Ancient wisdom is surfacing in your thoughts. Listen to the intuition that feels older than you.",future:"A long cycle is coming to a close. Be ready to step into a new destiny."}},
-  {id:134,name:"Vaporeon",type:"water",keyword:"Fluidity",readings:{past:"You learned to melt into your surroundings to survive. Your adaptability was your primary tool for safety.",present:"Be like water today. If you encounter a rock, do not fight it—simply flow around it.",future:"You will find a space where you can finally hold your own shape without needing to hide."}},
-  {id:135,name:"Jolteon",type:"electric",keyword:"Vibration",readings:{past:"You have always been highly sensitive to the energy around you. It was often overwhelming.",present:"Channel your nervous energy into creative action. Your speed is a gift if you use it intentionally.",future:"A sudden breakthrough is coming. It will be fast, bright, and will change everything in a flash."}},
-  {id:136,name:"Flareon",type:"fire",keyword:"Warmth",readings:{past:"You provided warmth to cold spaces and cold people in your past. You were the heart.",present:"Save some of that inner fire for yourself today. You deserve to be as warm as you are.",future:"The love you have radiated so generously will soon return to warm your own winter season."}},
-  {id:132,name:"Ditto",type:"normal",keyword:"Selfhood",readings:{past:"You spent years borrowing the shapes and personalities of others. You forgot your own original face.",present:"Today is about stripping away the masks. Find the simple, soft core of who you actually are.",future:"Once you know your true form, you can consciously choose which face to show the world."}}
+  {id:133,name:"Eevee",type:"normal",keyword:"Infinite Potential",readings:{past:"Your path was intentionally left open. The uncertainty of your past was actually a gift of total freedom.",present:"Endless possibilities sit before you. You do not have to choose just one version of yourself today.",future:"A spectacular transformation is on the horizon. When the time is right, your evolution will be breathtakingly clear."}},
+  {id:143,name:"Snorlax",type:"normal",keyword:"Sacred Rest",readings:{past:"You pushed yourself beyond your limits for too long. Your past was a marathon that required a stop.",present:"Permission is granted to be still. Productivity is not the measure of your worth in this moment.",future:"After this season of deep, sacred rest, you will rise with a strength that surprises even you."}},
+  {id:149,name:"Dragonite",type:"dragon",keyword:"Benevolence",readings:{past:"Dragonite represents Benevolence in a time where everyone was fighting for scrap. You chose to be the helper.",present:"Kindness is your primary power today. Use your massive strength to lift up those who cannot fly yet.",future:"Legendary peace awaits you. Your future is one of high altitudes and wide, calm perspectives on life."}},
+  {id:150,name:"Mewtwo",type:"psychic",keyword:"The Awakening",readings:{past:"You were defined by rules and origins you did not choose. You have broken those chains completely.",present:"Claim your own name and your own purpose. You are the architect of your own reality today.",future:"A brand new story is beginning. You will finally walk into a future that you designed yourself."}},
+  {id:151,name:"Mew",type:"psychic",keyword:"Beginner Curiosity",readings:{past:"You began with a spirit of pure play and innocence. That foundation is still alive inside you.",present:"Approach every problem with curiosity rather than strategy. Play is the most productive work you can do.",future:"Secrets will soon reveal themselves to you, but only if you maintain the wonder of a beginner."}},
+  {id:6,name:"Charizard",type:"fire",keyword:"Fierce Sovereignty",readings:{past:"You burned through old expectations that were holding you down. That fire cleared the way for flight.",present:"Spread your wings and take up space. You do not need anyone's permission to own your sky.",future:"You will soon reach a position of true authority where your fire protects rather than just burns."}},
+  {id:130,name:"Gyarados",type:"water",keyword:"Hardened Victory",readings:{past:"You spent years being underestimated and dismissed. That frustration was fuel for the leap you eventually took.",present:"The power you hold now is immense and volatile. Mastery of self is more important than mastery of others.",future:"A massive wave of change is coming. You are the only one strong enough to ride it to the end."}},
+  {id:59,name:"Arcanine",type:"fire",keyword:"Noble Loyalty",readings:{past:"You dedicated yourself to a cause or a person with absolute devotion. That bond defined your history.",present:"Stand your ground with the grace of a leader. Your presence alone provides security to those around you.",future:"Legendary status is earned through consistency. Keep showing up, and your legacy will be set in stone."}},
+  {id:65,name:"Alakazam",type:"psychic",keyword:"Mental Mastery",readings:{past:"You relied on your intellect to solve every riddle. You out-thought the world before you ever had to fight it.",present:"Focus your mind. The answer you are looking for is not external; it is already stored in your own memory.",future:"Your wisdom will soon be sought after by many. Prepare to teach what you have spent a lifetime learning."}},
+  {id:121,name:"Starmie",type:"water",keyword:"Cosmic Alignment",readings:{past:"You felt a pull toward something greater than the physical world. Your past was a search for hidden meaning.",present:"Your intuition is currently synced with the stars. Trust the 'gut feeling' that feels like a signal from afar.",future:"A core mystery will soon be solved. You will find that you are exactly where you were always meant to be."}},
+  {id:38,name:"Ninetales",type:"fire",keyword:"Karmic Fate",readings:{past:"Long memories and ancient patterns have shaped your journey. You are part of a larger cycle that spans lifetimes.",present:"Ancient wisdom is surfacing in your thoughts. Listen to the intuition that feels significantly older than you.",future:"A long karmic cycle is coming to a close. Be ready to step into a completely new and unwritten destiny."}},
+  {id:26,name:"Raichu",type:"electric",keyword:"Amplified Aura",readings:{past:"You kept your power grounded for a long time, building up a charge that was hidden from the world.",present:"The time for subtlety has passed. Release the full energy of your personality and let people see your glow.",future:"You will soon light the way for an entire group. Your energy is the spark needed to start a movement."}},
+  {id:3,name:"Venusaur",type:"grass",keyword:"Earth Abundance",readings:{past:"You have weathered many seasons and evolved through drought and storm. You are now a master of silent growth.",present:"You are standing in the full power of your harvest. Recognize the richness that surrounds your life right now.",future:"Share your abundance with others. Your personal garden will only grow larger the more of it you give away."}}
 ];
 
 function createStars() {
@@ -143,7 +144,6 @@ function shuffle(array) {
 async function drawCards() {
   document.getElementById('drawBtn').disabled = true;
   document.getElementById('dailyBtn').disabled = true;
-  
   const shuffled = shuffle([...pokemon]);
   drawn = shuffled.slice(0,3);
 
@@ -156,16 +156,16 @@ async function drawCards() {
     }, i * 500);
   });
 
-  document.getElementById('oracleMsgText').textContent = "Consulting the digital spirits...";
+  document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
   document.getElementById('oracleMsg').classList.add('visible');
 
   try {
-    const prompt = `Mystical oracle summary. Past ${drawn[0].keyword}, Present ${drawn[1].keyword}, Future ${drawn[2].keyword}. 3 short sentences. No dashes.`;
+    const prompt = `Act as a mystical tarot master. Summarize these Pokémon oracle cards into a cohesive story: Past ${drawn[0].name} (${drawn[0].keyword}), Present ${drawn[1].name} (${drawn[1].keyword}), Future ${drawn[2].name} (${drawn[2].keyword}). Keep it to 3 atmospheric sentences. No dashes.`;
     const response = await puter.ai.chat(prompt);
     document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
     document.getElementById('resetBtn').classList.add('visible');
   } catch (err) {
-    document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! Try again in a moment.";
+    document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! The spirits vanished. Try again in a moment.";
     document.getElementById('resetBtn').classList.add('visible');
   }
 }
@@ -174,9 +174,7 @@ function drawDaily() {
   document.getElementById('drawBtn').disabled = true;
   document.getElementById('dailyBtn').disabled = true;
   document.getElementById('cardsArea').classList.add('daily-mode');
-  
   const dailyPoke = pokemon[Math.floor(Math.random()*pokemon.length)];
-  
   document.getElementById('front1').innerHTML = buildCardFront(dailyPoke);
   document.getElementById('labels').style.opacity = '0';
   document.getElementById('slot0').style.display = 'none';
@@ -188,25 +186,13 @@ function drawDaily() {
     document.getElementById('readingText1').textContent = dailyPoke.readings.present;
     document.getElementById('reading1').classList.add('visible');
     document.getElementById('oracleMsg').classList.add('visible');
-    document.getElementById('oracleMsgText').textContent = `Today's medicine is ${dailyPoke.keyword}. ${dailyPoke.readings.present}`;
+    document.getElementById('oracleMsgText').textContent = `${dailyPoke.name} brings the energy of ${dailyPoke.keyword}. ${dailyPoke.readings.present}`;
     document.getElementById('resetBtn').classList.add('visible');
   }, 200);
 }
 
 function resetReading() {
-    document.getElementById('drawBtn').disabled = false;
-    document.getElementById('dailyBtn').disabled = false;
-    document.getElementById('cardsArea').classList.remove('daily-mode');
-    document.getElementById('labels').style.opacity = '1';
-    document.getElementById('slot0').style.display = 'flex';
-    document.getElementById('slot2').style.display = 'flex';
-    document.getElementById('posText1').textContent = "☀ Present";
-    document.getElementById('oracleMsg').classList.remove('visible');
-    document.getElementById('resetBtn').classList.remove('visible');
-    [0,1,2].forEach(i => {
-        document.getElementById('card'+i).classList.remove('flipped');
-        document.getElementById('reading'+i).classList.remove('visible');
-    });
+    location.reload();
 }
 
 createStars();
