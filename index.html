@@ -352,10 +352,10 @@ async function drawCards() {
     document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
     document.getElementById('oracleMsg').classList.add('visible');
     try {
-      // THE "FLOW" PROMPT: Tells AI to connect the 3 stages into one story
-      const prompt = `Speak as a high-level whimsical Tarot Oracle. You just pulled ${drawn[0].name} (Past), ${drawn[1].name} (Present), and ${drawn[2].name} (Future). 
-      In exactly 3 sentences, weave a single, flowing story showing how the energy of the past has shaped the current moment and how it is now propelling the seeker toward their destiny. 
-      Do not list the cards or use parentheses. Make it one continuous, mystical thought. No dashes.`;
+      // TIGHTENED PROMPT: Short, direct, and woven together.
+      const prompt = `You are a direct, whimsical Tarot Oracle. Pulling these energies: Past=${drawn[0].name}, Present=${drawn[1].name}, Future=${drawn[2].name}. 
+      In 3 short sentences, explain how the past's lesson created the current situation and how that leads to the future outcome. 
+      STRICT RULES: No greetings, no "Beloved seeker", no "Tarot spread", no mentions of "cards". Start immediately with the guidance. No dashes. One continuous thought.`;
       
       const response = await puter.ai.chat(prompt);
       document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
@@ -371,10 +371,8 @@ async function askFollowUp() {
     if (!userText) return;
     document.getElementById('followUpResponse').textContent = "The spirits are whispering...";
     try {
-        // FOLLOW-UP PROMPT: Uses context of the full spread to answer the specific question
-        const followUpPrompt = `The seeker drew ${currentDrawnPokeNames}. They are feeling this: "${userText}". 
-        As a whimsical Oracle, provide 2 sentences of comforting guidance that specifically connects their drawn cards to their current feelings. 
-        Keep the tone mysterious but very direct.`;
+        const followUpPrompt = `The seeker drew ${currentDrawnPokeNames} and asks: "${userText}". 
+        Provide 2 sentences of whimsical, direct guidance connecting their cards to this specific feeling. No fluff.`;
         
         const response = await puter.ai.chat(followUpPrompt);
         document.getElementById('followUpResponse').textContent = response.toString();
