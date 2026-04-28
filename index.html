@@ -21,63 +21,63 @@
   .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
   @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 1; } }
 
-  .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 20px 20px 60px; text-align: center; }
+  .container { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 20px 10px 60px; text-align: center; }
   
   .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 40px; }
   
   .draw-btn { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #0a0614; background: linear-gradient(135deg, #f0c040, #e0a020); border: none; padding: 16px 44px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(240,192,64,0.3); }
   .draw-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(240,192,64,0.5); }
-  .draw-btn:active { transform: scale(0.98); }
   
   .daily-btn { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; background: transparent; border: 1px solid rgba(157,143,192,0.4); padding: 10px 28px; border-radius: 50px; cursor: pointer; transition: all 0.3s; }
-  .daily-btn:hover { color: #f0c040; border-color: #f0c040; }
 
   .title { font-family: 'Cinzel', serif; font-size: clamp(22px, 4vw, 38px); font-weight: 700; color: #f0c040; letter-spacing: 4px; text-shadow: 0 0 30px rgba(240,192,64,0.5); margin-bottom: 6px; }
   .subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; color: #9d8fc0; margin-bottom: 30px; letter-spacing: 2px; }
 
-  .spread-labels { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; flex-wrap: wrap; transition: opacity 0.5s; }
-  .spread-label { width: 180px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: #9d8fc0; text-transform: uppercase; }
+  .spread-labels { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; }
+  .spread-label { flex: 1; max-width: 180px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; color: #9d8fc0; text-transform: uppercase; }
 
-  .cards-area { display: flex; justify-content: center; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
-  .card-slot { width: 180px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .card { width: 180px; height: 280px; position: relative; cursor: pointer; perspective: 1000px; }
+  .cards-area { display: flex; justify-content: center; gap: 20px; margin-bottom: 36px; align-items: flex-start; }
+  .card-slot { flex: 1; max-width: 180px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .card { width: 100%; aspect-ratio: 180/280; position: relative; cursor: pointer; perspective: 1000px; }
   .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
   .card.flipped .card-inner { transform: rotateY(180deg); }
   
   .card-back, .card-front { position: absolute; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; border: 1px solid rgba(240,192,64,0.3); overflow: hidden; }
-  .card-back { background: linear-gradient(135deg, #1a0a2e 0%, #0d1a3e 50%, #1a0a2e 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-  .card-back-symbol { font-size: 52px; opacity: 0.6; filter: drop-shadow(0 0 10px rgba(240,192,64,0.4)); }
+  .card-back { background: linear-gradient(135deg, #1a0a2e 0%, #0d1a3e 50%, #1a0a2e 100%); display: flex; align-items: center; justify-content: center; }
+  .card-back-symbol { font-size: 42px; opacity: 0.6; filter: drop-shadow(0 0 10px rgba(240,192,64,0.4)); }
 
   .card-front { transform: rotateY(180deg); background: #0f0820; display: flex; flex-direction: column; }
   
-  /* Opposite Color Scheme for Daily Card */
   .daily-mode .card-front { background: #e8dfc8; color: #0a0614; border: 2px solid #f0c040; }
   .daily-mode .card-name { color: #0a0614 !important; border-top: 1px solid rgba(0,0,0,0.1) !important; }
   .daily-mode .card-type-banner { border-bottom: 1px solid rgba(0,0,0,0.1) !important; color: #0a0614 !important; }
   .daily-mode .card-keyword { color: #0a0614 !important; }
 
-  .card-type-banner { padding: 8px 10px 6px; text-align: center; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .card-type-banner { padding: 8px 5px 6px; text-align: center; font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .card-art-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px; }
-  .card-art-img { width: 90px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); image-rendering: pixelated; }
-  .card-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; text-align: center; padding: 8px 10px 8px; border-top: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px; }
-  .card-keyword { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-align: center; padding: 4px 8px 8px; text-transform: uppercase; color: #f0c040; }
+  .card-art-img { width: 80%; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); image-rendering: pixelated; }
+  .card-name { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600; text-align: center; padding: 8px 5px; border-top: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px; }
+  .card-keyword { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; text-align: center; padding: 4px 5px 8px; text-transform: uppercase; color: #f0c040; }
 
-  .card-reading { width: 180px; min-height: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(240,192,64,0.15); border-radius: 12px; padding: 14px; opacity: 0; transition: opacity 0.6s ease 0.6s; text-align: left; }
+  .card-reading { width: 100%; min-height: 80px; background: rgba(255,255,255,0.03); border: 1px solid rgba(240,192,64,0.15); border-radius: 12px; padding: 12px; opacity: 0; transition: opacity 0.6s ease 0.6s; text-align: left; }
   .card-reading.visible { opacity: 1; }
-  .reading-position { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; margin-bottom: 8px; }
-  .reading-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 14px; line-height: 1.6; color: #c8bfa0; }
+  .reading-position { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #9d8fc0; margin-bottom: 6px; }
+  .reading-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 13px; line-height: 1.5; color: #c8bfa0; }
 
   .oracle-message { margin-top: 20px; padding: 24px 32px; background: rgba(240,192,64,0.05); border: 1px solid rgba(240,192,64,0.2); border-radius: 16px; max-width: 700px; margin-left: auto; margin-right: auto; opacity: 0; transition: opacity 1s; }
   .oracle-message.visible { opacity: 1; }
   .oracle-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #f0c040; margin-bottom: 12px; }
   .oracle-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 17px; line-height: 1.8; color: #d8ccb0; }
 
+  .follow-up-section { margin-top: 30px; opacity: 0; transition: opacity 0.5s; }
+  .follow-up-section.visible { opacity: 1; }
+  
   @media (max-width: 600px) {
-    .spread-label { width: 30vw; font-size: 9px; }
-    .cards-area:not(.daily-mode) .card-slot, .cards-area:not(.daily-mode) .card, .cards-area:not(.daily-mode) .card-reading { width: 30vw; }
-    .cards-area:not(.daily-mode) .card { height: 46vw; }
-    .cards-area:not(.daily-mode) .card-art-img { width: 50px; }
-    .draw-btn { padding: 14px 32px; font-size: 12px; }
+    .spread-labels { gap: 10px; }
+    .spread-label { font-size: 9px; }
+    .cards-area { gap: 10px; }
+    .card-reading { padding: 8px; }
+    .reading-text { font-size: 11px; }
   }
 </style>
 </head>
@@ -109,12 +109,18 @@
     <div class="oracle-title">✦ The Oracle Speaks ✦</div>
     <div class="oracle-text" id="oracleMsgText"></div>
   </div>
+
+  <div class="follow-up-section" id="followUpSection">
+      <input type="text" id="userInput" placeholder="Whisper a follow-up to the Oracle..." 
+             style="width: 80%; max-width: 400px; padding: 12px 20px; border-radius: 25px; border: 1px solid rgba(240,192,64,0.4); background: rgba(15,8,32,0.8); color: #e8dfc8; font-family: 'Crimson Pro', serif; outline: none; margin-bottom: 15px;">
+      <br>
+      <button onclick="askFollowUp()" class="daily-btn">Consult Further</button>
+      <div id="followUpResponse" class="oracle-text" style="margin-top:20px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto;"></div>
+  </div>
 </div>
 
 <script>
-
-/* <<<<<<<<<<<<<< PASTE YOUR HUGE ASS LIST BELOW THIS LINE >>>>>>>>>>> */
-
+/* PASTE YOUR HUGE ASS LIST BELOW THIS LINE */
 const pokemon = [
   {id:1,name:"Bulbasaur",type:"grass",keyword:"Quiet Patience",readings:{past:"You sowed seeds in silence long ago. Look for the first signs of green breaking the soil.",present:"You are where you need to be. Growth cannot be forced, only nurtured with steady care.",future:"Slow progress will build roots so deep that no coming storm can shake you.",daily:"Focus on your roots today. True growth happens when no one is watching, so be patient."}},
   {id:2,name:"Ivysaur",type:"grass",keyword:"The Budding",readings:{past:"A long season of preparation has ended. You outgrew the small pot you were kept in.",present:"The pressure you feel is simply the blossom trying to break through. Do not fear the strain.",future:"You are moving toward a period of vibrant color and recognition. Your efforts are finally visible.",daily:"Preparation is almost complete. Trust that you have gathered enough nutrients to finally bloom today."}},
@@ -269,11 +275,11 @@ const pokemon = [
   {id:151,name:"Mew",type:"psychic",keyword:"Beginner Curiosity",readings:{past:"You began with a spirit of play and innocence. That foundation is still alive inside you.",present:"Approach every problem with curiosity rather than strategy. Play is the most productive work.",future:"Secrets will soon reveal themselves, but only if you maintain the wonder of a beginner.",daily:"Look at your surroundings as if seeing them for the first time. Magic is everywhere today."}},
   {id:0,name:"MissingNo",type:"glitch",keyword:"The Great Unknown",readings:{past:"You encountered a massive error in your previous path. That chaos was a total rewrite of your reality.",present:"The rules do not apply to you today. You are in a glitch state where you can duplicate your luck.",future:"An unpredictable variable is heading your way. Do not try to plan; just be ready to adapt.",daily:"Today is a wild card. Expect the unexpected. Your routine is about to be gloriously interrupted."}}
 ];
-
-/* <<<<<<<<<<<<<< PASTE YOUR HUGE ASS LIST ABOVE THIS LINE >>>>>>>>>>> */
+/* PASTE YOUR HUGE ASS LIST ABOVE THIS LINE */
 
 const positions = ["past","present","future"];
 let drawn = [];
+let currentDrawnPokeNames = "";
 
 function createStars() {
   const container = document.getElementById('stars');
@@ -295,6 +301,9 @@ function clearSpread() {
     document.getElementById('slot2').style.display = 'flex';
     document.getElementById('posText1').textContent = "☀ Present";
     document.getElementById('oracleMsg').classList.remove('visible');
+    document.getElementById('followUpSection').classList.remove('visible');
+    document.getElementById('followUpResponse').textContent = "";
+    document.getElementById('userInput').value = "";
     [0,1,2].forEach(i => {
         document.getElementById('card'+i).classList.remove('flipped');
         document.getElementById('reading'+i).classList.remove('visible');
@@ -303,12 +312,11 @@ function clearSpread() {
 }
 
 function buildCardFront(poke) {
-  // Logic to handle MissingNo image from fossil sprite
   const spriteUrl = poke.id === 0 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png" : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
   return `
     <div class="card-type-banner">✦ ${poke.type.toUpperCase()} ✦</div>
     <div class="card-art-area"><img src="${spriteUrl}" class="card-art-img" alt="${poke.name}" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fossil-box.png'"></div>
-    <div class="card-name" style="color:#f0c040">${poke.name}</div>
+    <div class="card-name">${poke.name}</div>
     <div class="card-keyword">✦ ${poke.keyword} ✦</div>
   `;
 }
@@ -327,6 +335,7 @@ async function drawCards() {
   clearSpread();
   const shuffled = shuffle([...pokemon]);
   drawn = shuffled.slice(0,3);
+  currentDrawnPokeNames = `${drawn[0].name}, ${drawn[1].name}, and ${drawn[2].name}`;
 
   drawn.forEach((poke, i) => {
     document.getElementById('front'+i).innerHTML = buildCardFront(poke);
@@ -341,9 +350,10 @@ async function drawCards() {
     document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
     document.getElementById('oracleMsg').classList.add('visible');
     try {
-      const prompt = `Mystical tarot master story. Past ${drawn[0].name}, Present ${drawn[1].name}, Future ${drawn[2].name}. Summarize their combined message in 3 atmospheric sentences. Do not use parentheses or mention keywords. No dashes.`;
+      const prompt = `Speak as a direct but mystical Tarot Oracle. You just pulled these cards: ${drawn[0].name} (Past), ${drawn[1].name} (Present), and ${drawn[2].name} (Future). In exactly 3 sentences, provide a cohesive whimsical reading. Do not describe scenery or say things like 'In the chamber'. Focus purely on the guidance. No dashes or parentheses.`;
       const response = await puter.ai.chat(prompt);
       document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
+      document.getElementById('followUpSection').classList.add('visible');
     } catch (err) {
       document.getElementById('oracleMsgText').textContent = "ABRA used TELEPORT! The spirits vanished. Try again.";
     }
@@ -354,6 +364,8 @@ function drawDaily() {
   clearSpread();
   document.getElementById('cardsArea').classList.add('daily-mode');
   const dailyPoke = pokemon[Math.floor(Math.random()*pokemon.length)];
+  currentDrawnPokeNames = dailyPoke.name;
+
   document.getElementById('front1').innerHTML = buildCardFront(dailyPoke);
   document.getElementById('labels').style.opacity = '0';
   document.getElementById('slot0').style.display = 'none';
@@ -365,8 +377,22 @@ function drawDaily() {
     document.getElementById('readingText1').textContent = dailyPoke.readings.daily;
     document.getElementById('reading1').classList.add('visible');
     document.getElementById('oracleMsg').classList.add('visible');
-    document.getElementById('oracleMsgText').textContent = `${dailyPoke.name} brings a unique message. Look inward to find how this energy applies to your current path.`;
+    document.getElementById('oracleMsgText').textContent = `${dailyPoke.name} brings a unique message today. Look inward to find how this energy applies to your current path.`;
+    document.getElementById('followUpSection').classList.add('visible');
   }, 200);
+}
+
+async function askFollowUp() {
+    const userText = document.getElementById('userInput').value;
+    if (!userText) return;
+    document.getElementById('followUpResponse').textContent = "The spirits are whispering...";
+    try {
+        const followUpPrompt = `The user pulled ${currentDrawnPokeNames} and is asking: "${userText}". Speak as a mystical oracle. Provide 2 sentences of comforting, atmospheric guidance. Pure mysticism, no game talk.`;
+        const response = await puter.ai.chat(followUpPrompt);
+        document.getElementById('followUpResponse').textContent = response.toString();
+    } catch (err) {
+        document.getElementById('followUpResponse').textContent = "The connection flickered. Ask again.";
+    }
 }
 
 createStars();
