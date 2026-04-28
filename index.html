@@ -352,8 +352,11 @@ async function drawCards() {
     document.getElementById('oracleMsgText').textContent = "Consulting the psychic and ghost types...";
     document.getElementById('oracleMsg').classList.add('visible');
     try {
-      // Prompt tightened to be strictly Tarot guidance, no storytelling.
-      const prompt = `Speak as a direct, whimsical Tarot Oracle. You just pulled these cards: ${drawn[0].name} (Past), ${drawn[1].name} (Present), and ${drawn[2].name} (Future). In exactly 3 short sentences, provide a cohesive whimsical guidance for the seeker. Do not describe scenery, decks, or spreads. Speak only of the lessons and energy. No dashes or parentheses.`;
+      // THE "FLOW" PROMPT: Tells AI to connect the 3 stages into one story
+      const prompt = `Speak as a high-level whimsical Tarot Oracle. You just pulled ${drawn[0].name} (Past), ${drawn[1].name} (Present), and ${drawn[2].name} (Future). 
+      In exactly 3 sentences, weave a single, flowing story showing how the energy of the past has shaped the current moment and how it is now propelling the seeker toward their destiny. 
+      Do not list the cards or use parentheses. Make it one continuous, mystical thought. No dashes.`;
+      
       const response = await puter.ai.chat(prompt);
       document.getElementById('oracleMsgText').textContent = response.toString().replace(/—|–/g, '-');
       document.getElementById('followUpSection').classList.add('visible');
@@ -363,35 +366,16 @@ async function drawCards() {
   }, 1600);
 }
 
-function drawDaily() {
-  clearSpread();
-  document.getElementById('cardsArea').classList.add('daily-mode');
-  const dailyPoke = pokemon[Math.floor(Math.random()*pokemon.length)];
-  currentDrawnPokeNames = dailyPoke.name;
-
-  document.getElementById('front1').innerHTML = buildCardFront(dailyPoke);
-  document.getElementById('labels').style.opacity = '0';
-  document.getElementById('slot0').style.display = 'none';
-  document.getElementById('slot2').style.display = 'none';
-  document.getElementById('posText1').textContent = "☀ Daily Insight";
-  
-  setTimeout(() => {
-    document.getElementById('card1').classList.add('flipped');
-    document.getElementById('readingText1').textContent = dailyPoke.readings.daily;
-    document.getElementById('reading1').classList.add('visible');
-    document.getElementById('oracleMsg').classList.add('visible');
-    document.getElementById('oracleMsgText').textContent = `${dailyPoke.name} brings a unique message today. Look inward to find how this energy applies to your current path.`;
-    document.getElementById('followUpSection').classList.add('visible');
-  }, 200);
-}
-
 async function askFollowUp() {
     const userText = document.getElementById('userInput').value;
     if (!userText) return;
     document.getElementById('followUpResponse').textContent = "The spirits are whispering...";
     try {
-        // Follow-up prompt tightened for pure mysticism.
-        const followUpPrompt = `The user pulled ${currentDrawnPokeNames} and is asking: "${userText}". Speak as a direct, whimsical oracle. Provide 2 sentences of atmospheric guidance. No game mechanics or story descriptions.`;
+        // FOLLOW-UP PROMPT: Uses context of the full spread to answer the specific question
+        const followUpPrompt = `The seeker drew ${currentDrawnPokeNames}. They are feeling this: "${userText}". 
+        As a whimsical Oracle, provide 2 sentences of comforting guidance that specifically connects their drawn cards to their current feelings. 
+        Keep the tone mysterious but very direct.`;
+        
         const response = await puter.ai.chat(followUpPrompt);
         document.getElementById('followUpResponse').textContent = response.toString();
     } catch (err) {
